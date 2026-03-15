@@ -1,0 +1,50 @@
+# ==========================================
+# Compilação e Build (.NET / WPF)
+# ==========================================
+# Ignora as pastas onde o Visual Studio joga os executáveis e as DLLs do LibVLC
+[Bb]in/
+[Oo]bj/
+out/
+Publish/
+
+# ==========================================
+# Arquivos do Visual Studio (Configurações Locais)
+# ==========================================
+# Ignora a pasta oculta onde o VS guarda quais abas você deixou abertas
+.vs/
+# Ignora configurações específicas da sua máquina (caminhos locais, etc)
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ==========================================
+# Outras IDEs (VS Code e JetBrains Rider)
+# ==========================================
+.idea/
+*.ReSharper
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# ==========================================
+# NuGet Packages
+# ==========================================
+*.nupkg
+# A pasta packages era usada no .NET Framework antigo, mas é bom manter
+packages/
+
+# ==========================================
+# Logs, Testes e Crash Dumps
+# ==========================================
+*.log
+TestResults/
+*.crash
+*.mdmp
+
+# ==========================================
+# Arquivos de Sistema Operacional
+# ==========================================
+Thumbs.db
+.DS_Store
