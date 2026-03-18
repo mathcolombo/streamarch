@@ -1,24 +1,27 @@
 ﻿using System.Text.RegularExpressions;
 using StreamArch.Core.Models;
+using StreamArch.Core.Services.Commands;
 
 namespace StreamArch.Core.Services;
 
-public static class M3uParser
+public static partial class M3UParser
 {
-    private static readonly Regex AttributeRegex = new("(?<key>[\\w-]+)=\"(?<value>[^\"]*)\"", RegexOptions.Compiled);
+    private static readonly char[] LineSeparators = ['\r', '\n'];
+    private static readonly Regex AttributeRegex = MyRegex();
+    private const string InformationsTag = "#EXTINF";
 
     public static List<Channel> Parse(string content)
     {
         var result = new List<Channel>();
-        string[] lines = content.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        string[] lines = content.Split(LineSeparators, StringSplitOptions.RemoveEmptyEntries);
         
         ChannelBuilder? currentBuilder = null;
 
-        foreach (var line in lines)
+        foreach (string line in lines)
         {
             string text = line.Trim();
 
-            if (text.StartsWith("#EXTINF"))
+            if (text.StartsWith(InformationsTag))
             {
                 currentBuilder = new ChannelBuilder();
                 
@@ -29,9 +32,10 @@ public static class M3uParser
                     : "Sem Nome";
                 
                 MatchCollection matches = AttributeRegex.Matches(text);
+                
                 foreach (Match match in matches)
                 {
-                    var val = match.Groups["value"].Value;
+                    string val = match.Groups["value"].Value;
                     switch (match.Groups["key"].Value)
                     {
                         case "group-title":
@@ -56,11 +60,7 @@ public static class M3uParser
         }
         return result;
     }
-    
-    private class ChannelBuilder
-    {
-        public string Name { get; set; } = string.Empty;
-        public string? Group { get; set; }
-        public string? Logo { get; set; }
-    }
+
+    [GeneratedRegex("(?<key>[\\w-]+)=\"(?<value>[^\"]*)\"", RegexOptions.Compiled)]
+    private static partial Regex MyRegex();
 }

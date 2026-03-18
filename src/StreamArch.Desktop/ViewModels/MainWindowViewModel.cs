@@ -1,22 +1,26 @@
-﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LibVLCSharp.Shared;
 using StreamArch.Core.Interfaces;
 using StreamArch.Core.Models;
+using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace StreamArch.Desktop.ViewModels;
 
-public partial class MainViewModel : ObservableObject, IDisposable
+// Mantemos o nome padrão do template e adicionamos a interface IDisposable
+public partial class MainWindowViewModel : ViewModelBase, IDisposable
 {
     private readonly LibVLC _libVlc;
-    private readonly IPlaylistImporter _importer; // O Serviço injetado
+    private readonly IPlaylistImporter _importer;
 
-    // CONSTRUTOR: Agora exigimos um IPlaylistImporter
-    public MainViewModel(IPlaylistImporter importer)
+    // Construtor recebendo o nosso serviço de importação
+    public MainWindowViewModel(IPlaylistImporter importer)
     {
-        _importer = importer; // Guardamos para usar depois
+        _importer = importer;
 
+        // Inicializa o VLC nativo do Linux
         LibVLCSharp.Shared.Core.Initialize();
         _libVlc = new LibVLC();
         MediaPlayer = new MediaPlayer(_libVlc);
@@ -25,7 +29,7 @@ public partial class MainViewModel : ObservableObject, IDisposable
     public MediaPlayer MediaPlayer { get; }
 
     [ObservableProperty]
-    private ObservableCollection<Channel> _channels = [];
+    private ObservableCollection<Channel> _channels = new();
 
     [ObservableProperty]
     private Channel? _selectedChannel;
@@ -36,19 +40,15 @@ public partial class MainViewModel : ObservableObject, IDisposable
     }
 
     [RelayCommand]
-    private void LoadPlaylist()
+    private async Task LoadPlaylistAsync()
     {
-        // A ViewModel não sabe que isso abre uma janela. 
-        // Ela só pede: "Importador, me dê a lista".
-        var loadedChannels = _importer.LoadPlaylist();
-
+        var loadedChannels = await _importer.LoadPlaylistAsync();
+        
         if (loadedChannels != null)
         {
             Channels.Clear();
             foreach (var channel in loadedChannels)
-            {
                 Channels.Add(channel);
-            }
         }
     }
 

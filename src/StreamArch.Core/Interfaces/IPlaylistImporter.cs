@@ -4,5 +4,5 @@ namespace StreamArch.Core.Interfaces;
 
 public interface IPlaylistImporter
 {
-    List<Channel>? LoadPlaylist();
+    Task<List<Channel>?> LoadPlaylistAsync();
 }

@@ -2,9 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "src\StreamArch.Core", "src\StreamArch.Core\StreamArch.Core.csproj", "{C09123C4-03ED-49EE-A5AA-D3EE4212A44B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "src\StreamArch.Desktop", "src\StreamArch.Desktop\StreamArch.Desktop.csproj", "{8FBEEE37-C2F0-4FB9-BCA9-7C91DEB0ADEA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tests\StreamArch.Tests", "tests\StreamArch.Tests\StreamArch.Tests.csproj", "{4AA564FF-9287-4ECF-9B64-E8E80F5AD08E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamArch.Desktop", "src\StreamArch.Desktop\StreamArch.Desktop.csproj", "{3588F1C8-6CBD-4423-875A-A65EE8D52507}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,13 +16,13 @@ Global
 		{C09123C4-03ED-49EE-A5AA-D3EE4212A44B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C09123C4-03ED-49EE-A5AA-D3EE4212A44B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C09123C4-03ED-49EE-A5AA-D3EE4212A44B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8FBEEE37-C2F0-4FB9-BCA9-7C91DEB0ADEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8FBEEE37-C2F0-4FB9-BCA9-7C91DEB0ADEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8FBEEE37-C2F0-4FB9-BCA9-7C91DEB0ADEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8FBEEE37-C2F0-4FB9-BCA9-7C91DEB0ADEA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4AA564FF-9287-4ECF-9B64-E8E80F5AD08E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4AA564FF-9287-4ECF-9B64-E8E80F5AD08E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AA564FF-9287-4ECF-9B64-E8E80F5AD08E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AA564FF-9287-4ECF-9B64-E8E80F5AD08E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3588F1C8-6CBD-4423-875A-A65EE8D52507}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3588F1C8-6CBD-4423-875A-A65EE8D52507}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3588F1C8-6CBD-4423-875A-A65EE8D52507}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3588F1C8-6CBD-4423-875A-A65EE8D52507}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
