@@ -1,0 +1,65 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:StreamArch.Desktop.ViewModels"
+             xmlns:vlc="clr-namespace:LibVLCSharp.Avalonia;assembly=LibVLCSharp.Avalonia"
+             xmlns:models="using:StreamArch.Core.Models"
+             x:Class="StreamArch.Desktop.Views.PlayerView"
+             x:DataType="vm:PlayerViewModel">
+
+    <Grid ColumnDefinitions="Auto, *">
+        
+        <Grid Grid.Column="0" Width="300" Background="#252526" IsVisible="{Binding IsSidebarVisible}">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Background="#1e1e1e">
+                    <Button Command="{Binding GoBackCommand}" Content="⬅ Voltar para Home" 
+                            Background="Transparent" Foreground="#0078D7" FontWeight="Bold" Margin="0,0,0,10"/>
+                    <TextBlock Text="Categorias" FontWeight="Bold" FontSize="18" Foreground="White"/>
+                </StackPanel>
+
+                <ScrollViewer>
+                    <ItemsControl ItemsSource="{Binding GroupedChannels}" Margin="5">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Expander Header="{Binding Name}" HorizontalAlignment="Stretch" Margin="0,2" Background="#2d2d30">
+                                    <ItemsControl ItemsSource="{Binding Channels}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate DataType="models:Channel">
+                                                <Button Content="{Binding Name}" 
+                                                        Command="{Binding $parent[UserControl].((vm:PlayerViewModel)DataContext).PlayChannelCommand}"
+                                                        CommandParameter="{Binding}"
+                                                        HorizontalAlignment="Stretch"
+                                                        HorizontalContentAlignment="Left"
+                                                        Background="Transparent"
+                                                        Foreground="LightGray"
+                                                        Margin="0,2" Padding="10,8"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Expander>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </DockPanel>
+        </Grid>
+
+        <Grid Grid.Column="1" Background="Black">
+            
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10" ZIndex="1">
+                <Button Command="{Binding ToggleSidebarCommand}" Content="☰ Menu" Background="#88000000" Foreground="White"/>
+                <TextBlock Text="{Binding CurrentChannelName}" Foreground="White" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" Margin="15,0,0,0"/>
+            </StackPanel>
+
+            <vlc:VideoView MediaPlayer="{Binding MediaPlayer}" 
+                           IsVisible="{Binding !IsLoading}"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" IsVisible="{Binding IsLoading}">
+                <TextBlock Text="⏳" FontSize="50" HorizontalAlignment="Center" Margin="0,0,0,15"/>
+                <TextBlock Text="Conectando ao canal, por favor aguarde..." 
+                           Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+            </StackPanel>
+            
+        </Grid>
+    </Grid>
+</UserControl>

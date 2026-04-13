@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:StreamArch.Desktop.ViewModels"
+             x:Class="StreamArch.Desktop.Views.HomeView"
+             x:DataType="vm:HomeViewModel">
+             
+    <Grid Background="#1e1e1e">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
+            
+            <TextBlock Text="📺" FontSize="80" HorizontalAlignment="Center"/>
+            
+            <TextBlock Text="StreamArch" FontSize="42" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+            <TextBlock Text="Sua central de mídia multiplataforma." FontSize="18" Foreground="#aaaaaa" HorizontalAlignment="Center"/>
+            
+            <Button Content="📂 Carregar Lista M3U"
+                    Command="{Binding LoadFileCommand}"
+                    FontSize="20"
+                    FontWeight="SemiBold"
+                    Padding="30,15"
+                    Margin="0,20,0,0"
+                    Background="#0078D7"
+                    Foreground="White"
+                    CornerRadius="8"
+                    HorizontalAlignment="Center"
+                    Cursor="Hand"/>
+                    
+        </StackPanel>
+    </Grid>
+</UserControl>

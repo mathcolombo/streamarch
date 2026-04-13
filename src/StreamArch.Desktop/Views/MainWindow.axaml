@@ -1,43 +1,12 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:StreamArch.Desktop.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vlc="clr-namespace:LibVLCSharp.Avalonia;assembly=LibVLCSharp.Avalonia"
-        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
         x:Class="StreamArch.Desktop.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="StreamArch Player" Height="600" Width="1000"
+        Title="StreamArch" Height="600" Width="1000"
         Background="#1e1e1e">
 
-    <Grid ColumnDefinitions="300, *">
-        
-        <DockPanel Grid.Column="0" Background="#252526">
-            <Button DockPanel.Dock="Top" 
-                    Content="📂 Carregar Lista M3U" 
-                    Command="{Binding LoadPlaylistCommand}"
-                    HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Center"
-                    Margin="10"/>
+    <ContentControl Content="{Binding CurrentPage}" />
 
-            <ListBox ItemsSource="{Binding Channels}" 
-                     SelectedItem="{Binding SelectedChannel}"
-                     Background="Transparent">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Margin="5">
-                            <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="White"/>
-                            <TextBlock Text="{Binding Group}" FontSize="11" Foreground="Gray"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </DockPanel>
-
-        <Border Grid.Column="1" Background="Black">
-            <vlc:VideoView MediaPlayer="{Binding MediaPlayer}"/>
-        </Border>
-        
-    </Grid>
 </Window>
